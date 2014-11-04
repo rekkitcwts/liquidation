@@ -1,7 +1,34 @@
 <?php
 
-class UsersController extends AppController {
- 
+class UsersController extends AppController 
+{
+	public function isAuthorized($user) 
+	{
+    	// Only the admin can add users!
+    	
+
+    /*	// The owner of a post can edit and delete it
+    	if (in_array($this->action, array('edit', 'delete'))) 
+    	{
+        	$postId = (int) $this->request->params['pass'][0];
+        	if ($this->Post->isOwnedBy($postId, $user['id'])) 
+        	{
+            	return true;
+        	}
+    	} */
+
+    	return parent::isAuthorized($user);
+	}
+
+	public function adminChecker()
+	{
+		if ($this->Session->check('Auth.User') === false || $this->Auth->user('role')!='admin') 
+    	{
+    		$this->Session->setFlash('Access is denied.');
+            $this->redirect(array('action'=>'login'));
+    	}
+	}
+
     public $paginate = array(
         'limit' => 25,
         'conditions' => array('status' => '1'),
@@ -37,7 +64,10 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
  
-    public function index() {
+    public function index() 
+    {
+    	$this->adminChecker();
+
         $this->paginate = array(
             'limit' => 6,
             'order' => array('User.username' => 'asc' )
@@ -47,7 +77,10 @@ class UsersController extends AppController {
     }
  
  
-    public function add() {
+    public function add() 
+    {
+    	$this->adminChecker();
+
         if ($this->request->is('post')) {
                  
             $this->User->create();
@@ -60,7 +93,9 @@ class UsersController extends AppController {
         }
     }
  
-    public function edit($id = null) {
+    public function edit($id = null) 
+    {
+    	$this->adminChecker();
  
             if (!$id) {
                 $this->Session->setFlash('Please provide a user id');
@@ -88,7 +123,9 @@ class UsersController extends AppController {
             }
     }
  
-    public function delete($id = null) {
+    public function delete($id = null) 
+    {
+    	$this->adminChecker();
          
         if (!$id) {
             $this->Session->setFlash('Please provide a user id');
@@ -100,7 +137,7 @@ class UsersController extends AppController {
             $this->Session->setFlash('Invalid user id provided');
             $this->redirect(array('action'=>'index'));
         }
-        if ($this->User->saveField('status', 0)) {
+        if ($this->User->saveField('deleted', true)) {
             $this->Session->setFlash(__('User deleted'));
             $this->redirect(array('action' => 'index'));
         }
@@ -108,7 +145,9 @@ class UsersController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
      
-    public function activate($id = null) {
+    public function activate($id = null) 
+    {
+    	$this->adminChecker();
          
         if (!$id) {
             $this->Session->setFlash('Please provide a user id');
@@ -120,7 +159,7 @@ class UsersController extends AppController {
             $this->Session->setFlash('Invalid user id provided');
             $this->redirect(array('action'=>'index'));
         }
-        if ($this->User->saveField('status', 1)) {
+        if ($this->User->saveField('deleted', false)) {
             $this->Session->setFlash(__('User re-activated'));
             $this->redirect(array('action' => 'index'));
         }
