@@ -25,3 +25,20 @@ CREATE TABLE items (
     item_name varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE liquidations (
+    id serial NOT NULL,
+    recipient varchar(255) NOT NULL,
+    position varchar(255) NOT NULL,
+    form_number varchar(16) NOT NULL,
+    voucher_number varchar(16) NOT NULL,
+    amount_received numeric(8,2) NOT NULL,
+    buficom bigint NOT NULL,
+    org_id bigint NOT NULL,
+    created timestamp without time zone DEFAULT NULL,
+    modified timestamp without time zone DEFAULT NULL,
+    deleted boolean DEFAULT false,
+    PRIMARY KEY (id),
+    FOREIGN KEY (buficom) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (org_id) REFERENCES organisations(id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
