@@ -48,8 +48,13 @@
 </nav>
 
 </div>
-<?php echo $this->Html->link( "Add A New Organisation",   array('action'=>'add'),array('escape' => false) ); ?>
+
+<?php 
+    $this->start('sidebar');
+    echo $this->Html->link( "Add A New Organisation",   array('action'=>'add'),array('escape' => false) ); 
+?>
 <br/>
 <?php
 echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout'));
+    $this->end();
 ?>

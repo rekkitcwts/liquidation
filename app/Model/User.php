@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  
 class User extends AppModel 
 {
@@ -173,15 +174,19 @@ class User extends AppModel
      * @param array $options
      * @return boolean
      */
-     public function beforeSave($options = array()) {
-        // hash our password
-        if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+     public function beforeSave($options = array()) 
+     {
+        
+            // if ID is not set, we're inserting a new user as opposed to updating
+        if (isset($this->data[$this->alias]['password']) {
+            $passwordHasher = new BlowfishPasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
-         
-        // if we get a new password, hash it
-        if (isset($this->data[$this->alias]['password_update']) && !empty($this->data[$this->alias]['password_update'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password_update']);
+
+        if (isset($this->data[$this->alias]['password_update']) && !empty($this->data[$this->alias]['password_update']))
+        {
+            $passwordHasher2 = new BlowfishPasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password_update']);
         }
      
         // fallback to our parent

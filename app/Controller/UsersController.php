@@ -2,6 +2,8 @@
 
 class UsersController extends AppController 
 {
+   // var $components = array('Security');
+
 	public function isAuthorized($user) 
 	{
     	return parent::isAuthorized($user);

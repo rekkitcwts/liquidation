@@ -4,9 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79db072fd73ec34442c6f1d388de67d7",
-    "packages": [],
-    "packages-dev": [
+    "hash": "2ebb108c8b66cfaa42ae81e955f25b53",
+    "packages": [
         {
             "name": "cakephp/debug_kit",
             "version": "2.2.4",
@@ -560,6 +559,7 @@
             "time": "2014-10-01 05:50:18"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

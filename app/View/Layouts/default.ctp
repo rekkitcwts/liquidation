@@ -41,30 +41,47 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation Development Preview | 
 		</style>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!--	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   		<div class="container-fluid">
-    		<h4><?php echo $cakeDescription . $title_for_layout; ?></h4>
+    		<h4>Automated Liquidation <small>version 0.1 Albury</small></h4>
+    		<?php if (AuthComponent::user('id')): ?>
+   				Logged in as <?= AuthComponent::user('fname') . ' ' . AuthComponent::user('lname') ?>
+			<?php endif; ?>
+
   		</div>
-</nav>
+</nav> -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Automated Liquidation <small>version 0.1 Albury</small></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right" style="margin-right:5px;">
+					<?php if (AuthComponent::user('role') == 'admin'): ?>
+					<li><a href="#">Admin links here</a></li>
+					<?php endif; ?>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-2">
+				<?php echo $this->fetch('sidebar'); ?>
+			</div>
+			<div class="col-md-10">
 				<div id="content">
 					<?php echo $this->Session->flash(); ?>
 					<?php echo $this->fetch('content'); ?>
 				</div>
 			</div>
 		</div>
-
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-		</div>
+	</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 
