@@ -28,7 +28,7 @@
             <td style="text-align: center;"><?php echo $user['User']['role']; ?></td>
             <td style="text-align: center;"><?php echo $user['User']['deleted']; ?></td>
             <td >
-            <?php echo $this->Html->link(    "Edit",   array('action'=>'edit', $user['User']['id']) ); ?> |
+            <?php echo $this->Html->link("Edit",array('action'=>'edit', $user['User']['id'])); ?> |
             <?php
                 if( $user['User']['deleted'] !== 'f'){
                     echo $this->Html->link(    "Delete", array('action'=>'delete', $user['User']['id']));}else{
@@ -45,8 +45,8 @@
 <?php echo $this->Paginator->numbers(array(   'class' => 'numbers'     ));?>
 <?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 </div>               
-<?php echo $this->Html->link( "Add A New User.",   array('action'=>'add'),array('escape' => false) ); ?>
-<br/>
 <?php
-echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout'));
+    $this->start('sidebar');
+    echo $this->Html->link("<span class=\"glyphicon glyphicon-plus\"></span> Add A New User", array('action'=>'add'),array('escape' => false, 'class' => 'btn btn-primary') );
+    $this->end();
 ?>

@@ -177,8 +177,9 @@ class User extends AppModel
      public function beforeSave($options = array()) 
      {
         
-            // if ID is not set, we're inserting a new user as opposed to updating
-        if (isset($this->data[$this->alias]['password']) {
+         // if ID is not set, we're inserting a new user as opposed to updating
+        if (isset($this->data[$this->alias]['password']))
+        {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }

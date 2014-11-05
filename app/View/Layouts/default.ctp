@@ -63,7 +63,11 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation Development Preview | 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right" style="margin-right:5px;">
 					<?php if (AuthComponent::user('role') == 'admin'): ?>
-					<li><a href="#">Admin links here</a></li>
+					<li><?php echo $this->Html->link('Users', array('controller'=>'users', 'action'=>'index')); ?></li>
+					<li><?php echo $this->Html->link('Organisations', array('controller'=>'organisation', 'action'=>'index')); ?></li>
+					<?php endif; ?>
+					<?php if ($this->Session->check('Auth.User')): ?>
+					<li><?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?></li>
 					<?php endif; ?>
 				</ul>
 			</div><!--/.nav-collapse -->
