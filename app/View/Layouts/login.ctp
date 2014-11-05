@@ -24,13 +24,14 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation Development Preview | 
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $cakeDescription ?>
-		<?php echo $title_for_layout; ?>
+		Login
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
 	//	echo $this->Html->css('cake.generic');
 		echo $this->Html->css('bootstrap');
+		echo $this->Html->css('AdminLTE');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -51,27 +52,12 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation Development Preview | 
 				</button>
 				<a class="navbar-brand" href="#">Automated Liquidation <small>version 0.1 Albury</small></a>
 			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right" style="margin-right:5px;">
-					<?php if (AuthComponent::user('role') == 'admin'): ?>
-					<li><?php echo $this->Html->link('Users', array('controller'=>'users', 'action'=>'index')); ?></li>
-					<li><?php echo $this->Html->link('Organisations', array('controller'=>'organisation', 'action'=>'index')); ?></li>
-					<?php endif; ?>
-					<?php if ($this->Session->check('Auth.User')): ?>
-					<li><?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?></li>
-					<?php endif; ?>
-				</ul>
-			</div><!--/.nav-collapse -->
 		</div>
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2">
-				<?php echo $this->fetch('sidebar'); ?>
-			</div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<div id="content">
-					<?php echo $this->Session->flash(); ?>
 					<?php echo $this->fetch('content'); ?>
 				</div>
 			</div>

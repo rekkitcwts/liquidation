@@ -37,6 +37,8 @@ class UsersController extends AppController
         if($this->Session->check('Auth.User')){
             $this->redirect(array('action' => 'index'));     
         }
+
+        $this->layout = 'login';
          
         // if we get the post information, try to authenticate
         if ($this->request->is('post')) {
