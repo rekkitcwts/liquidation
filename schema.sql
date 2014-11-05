@@ -19,3 +19,9 @@ CREATE TABLE organisations (
     name varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE items (
+    id serial NOT NULL,
+    item_name varchar(255) NOT NULL,
+    PRIMARY KEY (id)
+);
