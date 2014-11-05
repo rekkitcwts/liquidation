@@ -8,7 +8,7 @@ class OrganisationController extends AppController
             'limit' => 6,
             'order' => array('Organisation.name' => 'asc' )
         );
-        $users = $this->paginate('Organisation');
+        $organisations = $this->paginate('Organisation');
         $this->set(compact('organisations'));
 	}
 }
