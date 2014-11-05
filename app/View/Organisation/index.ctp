@@ -1,6 +1,5 @@
 <div class="organisations form">
-<h1>Organisations</h1>
-	<table>
+	<table class="table table-hover table-bordered">
     <thead>
         <tr>
             <th><?php echo $this->Form->checkbox('all', array('name' => 'CheckAll',  'id' => 'CheckAll')); ?></th>
@@ -17,7 +16,7 @@
             <td><?php echo $this->Form->checkbox('Organisation.id.'.$organisation['Organisation']['id']); ?></td>
             <td><?php echo $this->Html->link( $organisation['Organisation']['name']  ,   array('action'=>'edit', $organisation['Organisation']['id']),array('escape' => false) );?></td>
             <td >
-            <?php echo $this->Html->link(    "Edit",   array('action'=>'edit', $organisation['Organisation']['id']) ); ?> |
+            <?php echo $this->Html->link(    "Edit",   array('action'=>'edit', $organisation['Organisation']['id']) ); ?>
             <?php
 /*                if( $user['User']['deleted'] !== 'f'){
                     echo $this->Html->link(    "Delete", array('action'=>'delete', $user['User']['id']));}else{
@@ -30,9 +29,27 @@
         <?php unset($organisation); ?>
     </tbody>
 </table>
+
+<nav>
+<!--    <ul class="pagination">
+        <li><?php echo $this->Paginator->prev(htmlentities('&laquo;'), array(), null, array('class'=>'disabled'));?></li>
+
+<?php echo $this->Paginator->numbers(array(   'class' => 'numbers'     ));?>
+<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+    </ul> -->
+    <?php
+        $pagination = array(
+                $this->Paginator->prev(),
+                $this->Paginator->numbers(),
+                $this->Paginator->next()
+            );
+        echo $this->Html->nestedList($pagination, array('class' => 'pagination'));
+    ?>
+</nav>
+
 </div>
 <?php echo $this->Html->link( "Add A New Organisation",   array('action'=>'add'),array('escape' => false) ); ?>
 <br/>
 <?php
-echo $this->Html->link( "Logout",   array('action'=>'logout') );
+echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout'));
 ?>

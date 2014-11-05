@@ -1,6 +1,5 @@
 <div class="users form">
-<h1>Users</h1>
-<table>
+<table class="table table-hover table-bordered">
     <thead>
         <tr>
             <th><?php echo $this->Form->checkbox('all', array('name' => 'CheckAll',  'id' => 'CheckAll')); ?></th>
@@ -49,5 +48,5 @@
 <?php echo $this->Html->link( "Add A New User.",   array('action'=>'add'),array('escape' => false) ); ?>
 <br/>
 <?php
-echo $this->Html->link( "Logout",   array('action'=>'logout') );
+echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout'));
 ?>

@@ -25,4 +25,10 @@ echo $this->Html->link( "Logout",   array('action'=>'logout') );
 }else{
 echo $this->Html->link( "Return to Login Screen",   array('action'=>'login') );
 }
+echo '<br />';
+for ($i=0; $i < count($testing); $i++) 
+{ 
+    echo $testing[$i]['Organisation']['id'] . '=>' . $testing[$i]['Organisation']['name'] . '<br />';
+}
+
 ?>
