@@ -4,19 +4,6 @@ class UsersController extends AppController
 {
 	public function isAuthorized($user) 
 	{
-    	// Only the admin can add users!
-    	
-
-    /*	// The owner of a post can edit and delete it
-    	if (in_array($this->action, array('edit', 'delete'))) 
-    	{
-        	$postId = (int) $this->request->params['pass'][0];
-        	if ($this->Post->isOwnedBy($postId, $user['id'])) 
-        	{
-            	return true;
-        	}
-    	} */
-
     	return parent::isAuthorized($user);
 	}
 
@@ -80,6 +67,10 @@ class UsersController extends AppController
     public function add() 
     {
     	$this->adminChecker();
+        $this->loadModel('Organisation');
+        //$testing = $this->Organisation->query("SELECT * FROM organisations");
+        $testing = $this->Organisation->find('all');
+        $this->set('testing', $testing);
 
         if ($this->request->is('post')) {
                  
