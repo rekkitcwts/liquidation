@@ -2,18 +2,20 @@
 
 class Liquidation extends AppModel 
 {
-	public $hasOne = array(
-		'buficom' => array(
+	public $belongsTo = array(
+		'Buficom' => array(
 			'className' => 'User',
-			'foreignKey' => 'id',
+			'foreignKey' => 'buficom',
 			'conditions' => array(
-				'User.role' => 'buficom'
+				'Buficom.role' => 'buficom'
 			),
+			'type' => 'inner',
 			'dependent' => true
 		),
-		'org_id' => array(
+		'Organisation' => array(
 			'className' => 'Organisation',
-			'foreignKey' => 'id',
+			'foreignKey' => 'org_id',
+			'type' => 'inner',
 			'dependent' => true
 		)
 	);
