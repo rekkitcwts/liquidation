@@ -75,7 +75,6 @@ class UsersController extends AppController
     {
     	$this->adminChecker();
         $this->loadModel('Organisation');
-        //$testing = $this->Organisation->query("SELECT * FROM organisations");
         $testing = $this->Organisation->find('all');
         $this->set('testing', $testing);
 
@@ -87,7 +86,7 @@ class UsersController extends AppController
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The user could not be created. Please, try again.'));
-            }  
+            }
         }
     }
  
@@ -135,7 +134,7 @@ class UsersController extends AppController
             $this->Session->setFlash('Invalid user id provided');
             $this->redirect(array('action'=>'index'));
         }
-        if ($this->User->saveField('deleted', true)) {
+        if ($this->User->saveField('deleted', 'true')) {
             $this->Session->setFlash(__('User deleted'));
             $this->redirect(array('action' => 'index'));
         }
@@ -157,12 +156,35 @@ class UsersController extends AppController
             $this->Session->setFlash('Invalid user id provided');
             $this->redirect(array('action'=>'index'));
         }
-        if ($this->User->saveField('deleted', false)) {
+        if ($this->User->saveField('deleted', 'false')) {
             $this->Session->setFlash(__('User re-activated'));
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('User was not re-activated'));
         $this->redirect(array('action' => 'index'));
     }
- 
+
+    public function view($id = null)
+    {
+        $this->adminChecker();
+         
+        if (!$id || !is_numeric($id)) {
+            $this->Session->setFlash('Please provide a user id');
+            $this->redirect(array('action'=>'index'));
+        }
+
+        $user = $this->User->findById($id);
+        if (!$user) 
+        {
+            $this->Session->setFlash('The user specified was not found.');
+            $this->redirect(array('action'=>'index'));
+        }
+        else
+        {
+            $this->loadModel('UserOrganisation');
+            $orgs = $this->UserOrganisation->find('all', array('conditions' => array('UserOrganisation.user_id' => $id)));
+            $this->set('user', $user);
+            $this->set('orgs', $orgs);
+        }
+    }
 }

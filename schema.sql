@@ -35,10 +35,19 @@ CREATE TABLE liquidations (
     amount_received numeric(8,2) NOT NULL,
     buficom bigint NOT NULL,
     org_id bigint NOT NULL,
-    created timestamp without time zone DEFAULT NULL,
-    modified timestamp without time zone DEFAULT NULL,
+    created timestamp without time zone NOT NULL,
+    modified timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false,
     PRIMARY KEY (id),
     FOREIGN KEY (buficom) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (org_id) REFERENCES organisations(id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE user_organisation (
+    id serial NOT NULL,
+    user_id bigint NOT NULL,
+    org_id bigint NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (org_id) REFERENCES organisations(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );

@@ -14,7 +14,20 @@ class LiquidationController extends AppController
 
 	public function add()
 	{
-		
+        $this->loadModel('Organisation');
+        $orgs = $this->Organisation->find('all', array('order' => 'Organisation.name ASC'));
+        $this->set('orgs', $orgs);
+
+		if ($this->request->is('post'))
+        {
+            $this->Liquidation->create();
+            if ($this->Liquidation->save($this->request->data)) {
+                $this->Session->setFlash(__('Liquidation report filed. Please select it to add items for reimbursement.'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Unable to file a liquidation report, please try again later.'));
+            }  
+        }
 	}
 
 	public function view($id = null)

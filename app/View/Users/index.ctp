@@ -20,7 +20,7 @@
         <?php if($count % 2): echo '<tr>'; else: echo '<tr class="zebra">' ?>
         <?php endif; ?>
             <td><?php echo $this->Form->checkbox('User.id.'.$user['User']['id']); ?></td>
-            <td><?php echo $this->Html->link( $user['User']['username']  ,   array('action'=>'edit', $user['User']['id']),array('escape' => false) );?></td>
+            <td><?php echo $this->Html->link( $user['User']['username']  ,   array('action'=>'view', $user['User']['id']),array('escape' => false) );?></td>
             <td style="text-align: center;"><?php echo $user['User']['fname']; ?></td>
             <td style="text-align: center;"><?php echo $user['User']['lname']; ?></td>
             <td style="text-align: center;"><?php echo $this->Time->niceShort($user['User']['created']); ?></td>
