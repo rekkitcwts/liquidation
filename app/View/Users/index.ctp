@@ -9,7 +9,7 @@
             <th><?php echo $this->Paginator->sort('created', 'Created');?></th>
             <th><?php echo $this->Paginator->sort('modified','Last Update');?></th>
             <th><?php echo $this->Paginator->sort('role','Role');?></th>
-            <th><?php echo $this->Paginator->sort('deleted','Is Deleted?');?></th>
+            <th>Account Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -26,14 +26,35 @@
             <td style="text-align: center;"><?php echo $this->Time->niceShort($user['User']['created']); ?></td>
             <td style="text-align: center;"><?php echo $this->Time->niceShort($user['User']['modified']); ?></td>
             <td style="text-align: center;"><?php echo $user['User']['role']; ?></td>
-            <td style="text-align: center;"><?php echo $user['User']['deleted']; ?></td>
+            <td style="text-align: center;">
+                <?php
+                if ($user['User']['deleted']) 
+                {
+                    echo 'Suspended';
+                } 
+                else 
+                {
+                    echo 'Active';
+                }
+                ?>
+            </td>
             <td >
-            <?php echo $this->Html->link("Edit",array('action'=>'edit', $user['User']['id'])); ?> |
+            <?php echo $this->Html->link("Edit",array('action'=>'edit', $user['User']['id'])); ?>
             <?php
-                if( $user['User']['deleted'] !== 'f'){
-                    echo $this->Html->link(    "Delete", array('action'=>'delete', $user['User']['id']));}else{
-                    echo $this->Html->link(    "Re-Activate", array('action'=>'activate', $user['User']['id']));
-                    }
+            if ($user['User']['id'] != AuthComponent::user('id')) 
+            {
+                // Admin cannot delete himself
+                if( $user['User']['deleted'] != 1)
+                {
+                    echo ' | ';
+                    echo $this->Html->link("Delete", array('action'=>'delete', $user['User']['id']));
+                }
+                else
+                {
+                    echo ' | ';
+                    echo $this->Html->link("Re-Activate", array('action'=>'activate', $user['User']['id']));
+                }
+            }
             ?>
             </td>
         </tr>
