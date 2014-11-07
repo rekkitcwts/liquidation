@@ -4,7 +4,7 @@ class UsersController extends AppController
 {
    // var $components = array('Security');
 
-	public function isAuthorized($user) 
+	public function isAuthorized($user)
 	{
     	return parent::isAuthorized($user);
 	}
@@ -44,7 +44,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->Session->setFlash(__('Welcome, '. $this->Auth->user('username')));
-                $this->redirect($this->Auth->redirectUrl());
+                if ($this->Auth->user('role')=='admin') {
+                    $this->redirect($this->Auth->redirectUrl());
+                }
+               // $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password'));
             }
