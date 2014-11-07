@@ -6,9 +6,9 @@ class Liquidation extends AppModel
 		'Buficom' => array(
 			'className' => 'User',
 			'foreignKey' => 'buficom',
-			'conditions' => array(
+		/*	'conditions' => array(
 				'Buficom.role' => 'buficom'
-			),
+			),*/
 			'type' => 'inner',
 			'dependent' => true
 		),

@@ -13,7 +13,6 @@
 		<?php $count=0; ?>
         <?php foreach($liquidations as $liquidation): ?>               
         <?php $count ++;?>
-        <?php if ((AuthComponent::user('role') == 'admin') || ((AuthComponent::user('role') == 'buficom') && ($liquidation['Buficom']['id'] === AuthComponent::user('id')))): ?>
         <?php echo '<tr>'; ?>
             <td><?php echo $this->Form->checkbox('Liquidation.id.'.$liquidation['Liquidation']['id']); ?></td>
             <td><?php echo $this->Html->link( $liquidation['Liquidation']['form_number']  ,   array('action'=>'view', $liquidation['Liquidation']['id']),array('escape' => false) );?></td>
@@ -23,7 +22,6 @@
             <?php echo $this->Html->link("Edit",array('action'=>'edit', $liquidation['Liquidation']['id']) ); ?>
             </td>
         </tr>
-        <?php endif; ?>
         <?php endforeach; ?>
         <?php unset($liquidations); ?>
 	</tbody>
