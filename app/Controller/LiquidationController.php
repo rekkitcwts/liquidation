@@ -46,7 +46,33 @@ class LiquidationController extends AppController
         }
         else
         {
+            $this->loadModel('Disbursement');
+            $disbursements = $this->Disbursement->find('all', array('conditions' => array('Disbursement.liquidation_id' => $id)));
         	$this->set('liquidation', $liquidation);
+            $this->set('disbursements', $disbursements);
         }
 	}
+
+    public function disbursements($id = null)
+    {
+        if (!$id || !is_numeric($id)) 
+        {
+            $this->Session->setFlash('No valid data to display.');
+            $this->redirect(array('action'=>'index'));
+        }
+
+        $liquidation = $this->Liquidation->findById($id);
+        if (!$liquidation) 
+        {
+            $this->Session->setFlash('The liquidation report you specified was not found.');
+            $this->redirect(array('action'=>'index'));
+        }
+        else
+        {
+            $this->loadModel('Disbursement');
+            $disbursements = $this->Disbursement->find('all', array('conditions' => array('Disbursement.liquidation_id' => $id)));
+            $this->set('liquidation', $liquidation);
+            $this->set('disbursements', $disbursements);
+        }
+    }
 }

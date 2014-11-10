@@ -69,10 +69,10 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation | version 0.1 Albury |
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<?php echo $this->fetch('sidebar'); ?>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>
 				<?php echo $this->fetch('content'); ?>
