@@ -32,6 +32,7 @@ CREATE TABLE liquidations (
     position varchar(255) NOT NULL,
     form_number varchar(16) NOT NULL,
     voucher_number varchar(16) NOT NULL,
+    activity varchar(255) NOT NULL,
     amount_received numeric(8,2) NOT NULL,
     buficom bigint NOT NULL,
     org_id bigint NOT NULL,
@@ -50,4 +51,16 @@ CREATE TABLE user_organisation (
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (org_id) REFERENCES organisations(id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE disbursements (
+    id serial NOT NULL,
+    liquidation_id bigint NOT NULL,
+    item_id bigint NOT NULL,
+    disbursement_date date NOT NULL,
+    or_number varchar(20) NOT NULL,
+    amount numeric(8,2) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (liquidation_id) REFERENCES liquidations(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (item_id) REFERENCES items(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );

@@ -11,6 +11,7 @@
 	<?php
 		echo $this->Form->input('recipient');
 		echo $this->Form->input('position');
+		echo $this->Form->input('activity');
 		echo $this->Form->input('form_number');
 		echo $this->Form->input('voucher_number');
 		echo $this->Form->input('amount_received');

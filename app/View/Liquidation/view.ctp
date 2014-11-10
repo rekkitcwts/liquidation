@@ -9,6 +9,14 @@
 			<td><?php echo $liquidation['Liquidation']['recipient']; ?></td>
 		</tr>
 		<tr>
+			<td><strong>Recipient's Position</strong></td>
+			<td><?php echo $liquidation['Liquidation']['position']; ?></td>
+		</tr>
+		<tr>
+			<td><strong>Activity</strong></td>
+			<td><?php echo $liquidation['Liquidation']['activity']; ?></td>
+		</tr>
+		<tr>
 			<td><strong>Filed By</strong></td>
 			<td><?php echo $liquidation['Buficom']['fname'] . ' ' . $liquidation['Buficom']['lname']; ?></td>
 		</tr>
@@ -17,7 +25,7 @@
 			<td><?php echo $liquidation['Liquidation']['form_number']; ?></td>
 		</tr>
 		<tr>
-			<td><strong>Voucher No.</strong></td>
+			<td><strong>Per Cash Voucher No.</strong></td>
 			<td><?php echo $liquidation['Liquidation']['voucher_number']; ?></td>
 		</tr>
 		<tr>
