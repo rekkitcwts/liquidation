@@ -84,6 +84,6 @@
     $this->start('sidebar');
     echo $this->Html->link("<span class=\"glyphicon glyphicon-book\"></span> Generate PDF", array('action'=>'generatePDF', $liquidation['Liquidation']['id']),array('escape' => false, 'class' => 'btn btn-success') );
     echo $this->Html->link("<span class=\"glyphicon glyphicon-chevron-left\"></span> Back to Liquidation Listings", array('action'=>'index'),array('escape' => false, 'class' => 'btn btn-info') );
-    echo $this->Html->link("<span class=\"glyphicon glyphicon-shopping-cart\"></span> Add or Remove Disbursements", array('action'=>'disbursements', $liquidation['Liquidation']['id']),array('escape' => false, 'class' => 'btn btn-primary') );
+    echo $this->Html->link("<span class=\"glyphicon glyphicon-shopping-cart\"></span> Add or Remove Disbursements", array('controller' => 'disbursements', 'action'=>'view', $liquidation['Liquidation']['id']),array('escape' => false, 'class' => 'btn btn-primary') );
     $this->end();
 ?>
