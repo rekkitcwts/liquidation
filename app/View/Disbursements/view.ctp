@@ -14,6 +14,7 @@
 			<th>OR Number</th>
 			<th>Particulars</th>
 			<th>Amount</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -33,6 +34,11 @@
 				echo '<td>';
 				echo $disbursement['Disbursement']['amount'];
 				echo '</td>';
+				echo '<td>';
+				echo $this->Html->link("Edit",array('action'=>'edit', $disbursement['Disbursement']['id']));
+				echo ' | ';
+				echo $this->Html->link("Delete",array('action'=>'delete', $disbursement['Disbursement']['id']));
+				echo '</td>';
 				echo '</tr>';
 			}
 		?>
@@ -40,7 +46,9 @@
 </table>
   </div>
   <div role="tabpanel" class="tab-pane" id="add">
-  	<p><strong class="text-danger">STOP!</strong> Are you sure that the item you are trying to add is listed? Check it in the item dropdown below or <?php echo $this->Html->link("check it here first.", array('controller' => 'items', 'action'=>'index'),array('escape' => false) ); ?> If the item is not listed on BOTH the items page and the dropdown below, then <?php echo $this->Html->link("add it here.", array('controller' => 'items', 'action'=>'add'),array('escape' => false) ); ?></p>
+  	<div class="alert alert-warning" role="alert">
+  		<p><strong class="text-danger">STOP!</strong> Are you sure that the item you are trying to add is listed? Check it in the item dropdown below or <?php echo $this->Html->link("check it here first.", array('controller' => 'items', 'action'=>'index'),array('escape' => false, 'class' => 'alert-link') ); ?> If the item is not listed on BOTH the items page and the dropdown below, then <?php echo $this->Html->link("add it here.", array('controller' => 'items', 'action'=>'add'),array('escape' => false, 'class' => 'alert-link') ); ?></p>
+  	</div>
   	<?php
 		$items_options = array();
 		foreach ($items as $item) 

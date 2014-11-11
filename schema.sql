@@ -60,6 +60,7 @@ CREATE TABLE disbursements (
     disbursement_date date NOT NULL,
     or_number varchar(20) NOT NULL,
     amount numeric(8,2) NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (liquidation_id) REFERENCES liquidations(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (item_id) REFERENCES items(id) ON UPDATE CASCADE ON DELETE RESTRICT

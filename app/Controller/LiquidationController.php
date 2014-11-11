@@ -47,7 +47,7 @@ class LiquidationController extends AppController
         else
         {
             $this->loadModel('Disbursement');
-            $disbursements = $this->Disbursement->find('all', array('conditions' => array('Disbursement.liquidation_id' => $id)));
+            $disbursements = $this->Disbursement->find('all', array('conditions' => array('Disbursement.liquidation_id' => $id, 'Disbursement.deleted' => 'false')));
         	$this->set('liquidation', $liquidation);
             $this->set('disbursements', $disbursements);
         }
