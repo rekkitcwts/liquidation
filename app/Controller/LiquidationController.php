@@ -52,4 +52,41 @@ class LiquidationController extends AppController
             $this->set('disbursements', $disbursements);
         }
 	}
+
+    public function edit($id = null)
+    {
+        if (!$id || !is_numeric($id)) 
+        {
+            $this->Session->setFlash('No valid data to display.');
+            $this->redirect(array('action'=>'index'));
+        }
+
+        $liquidation = $this->Liquidation->findById($id);
+        if (!$liquidation) 
+        {
+            $this->Session->setFlash('The liquidation report you specified was not found.');
+            $this->redirect(array('action'=>'index'));
+        }
+        else
+        {
+            $this->loadModel('Organisation');
+            $orgs = $this->Organisation->find('all', array('order' => 'Organisation.name ASC'));
+            $this->set('orgs', $orgs);
+            $this->set('liquidation', $liquidation);
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) 
+        {
+            $this->Liquidation->id = $id;
+            if ($this->Liquidation->save($this->request->data)) 
+            {
+                $this->Session->setFlash(__('Liquidation has been updated'));
+                $this->redirect(array('action' => 'index'));
+            }
+            else
+            {
+                $this->Session->setFlash(__('Unable to update the liquidation.'));
+            }
+        }
+    }
 }

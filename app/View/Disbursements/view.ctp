@@ -35,9 +35,31 @@
 				echo $disbursement['Disbursement']['amount'];
 				echo '</td>';
 				echo '<td>';
-				echo $this->Html->link("Edit",array('action'=>'edit', $disbursement['Disbursement']['id']));
-				echo ' | ';
-				echo $this->Html->link("Delete",array('action'=>'delete', $disbursement['Disbursement']['id']));
+				echo $this->Html->link("<span class=\"glyphicon glyphicon-pencil\"></span> Edit", array('action'=>'edit', $disbursement['Disbursement']['id']),array('escape' => false, 'class' => 'btn btn-success') );
+				echo ' ';
+				echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete'.$disbursement['Disbursement']['id'].'"><span class="glyphicon glyphicon-trash"></span> Delete</button>';
+		?>
+		<!-- Modal -->
+<div class="modal fade" id="confirmDelete<?php echo $disbursement['Disbursement']['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Disbursement Removal</h4>
+      </div>
+      <div class="modal-body">
+        <p>Remove this disbursement? This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+       	<?php
+       		echo $this->Html->link("Yes",array('action'=>'delete', $disbursement['Disbursement']['id']),array('class' => 'btn btn-danger'));
+       	?>
+       	<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+		<?php
 				echo '</td>';
 				echo '</tr>';
 			}
@@ -75,3 +97,4 @@
     echo $this->Html->link("<span class=\"glyphicon glyphicon-chevron-left\"></span> Back to Liquidation Form", array('controller' => 'liquidation', 'action'=>'view', $liquidation['Liquidation']['id']),array('escape' => false, 'class' => 'btn btn-info') );
     $this->end();
 ?>
+

@@ -16,7 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'Automated Liquidation Development Preview | ');
+$cakeDescription = __d('cake_dev', 'Automated Liquidation | version 0.1 Albury | ');
 ?>
 <!DOCTYPE html>
 <html>
