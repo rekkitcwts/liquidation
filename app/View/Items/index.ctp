@@ -2,7 +2,6 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
-				<th></th>
 				<th>Item Name</th>
 				<th>Actions</th>
 			</tr>
@@ -12,10 +11,9 @@
 			<?php foreach($items as $item): ?>      
 			<?php $count ++;?>
 			<tr>
-				<td><?php echo $this->Form->checkbox('Item.id.'.$item['Item']['id']); ?></td>
 				<td><?php echo $this->Html->link( $item['Item']['item_name']  ,   array('action'=>'edit', $item['Item']['id']),array('escape' => false) );?></td>
 				<td>
-					<?php echo $this->Html->link("Edit",array('action'=>'edit', $item['Item']['id']) ); ?>
+					<?php echo $this->Html->link("<span class=\"glyphicon glyphicon-pencil\"></span> Edit",array('action'=>'edit', $item['Item']['id']),array('escape' => false, 'class' => 'btn btn-success')); ?>
 				</td>
 			</tr>
 

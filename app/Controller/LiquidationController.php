@@ -5,6 +5,7 @@ class LiquidationController extends AppController
 	public function index()
 	{
 		$this->paginate = array(
+            'conditions' => array('Liquidation.deleted' => 'false'),
             'limit' => 6,
             'order' => array('Liquidation.created' => 'desc' )
         );
@@ -88,5 +89,27 @@ class LiquidationController extends AppController
                 $this->Session->setFlash(__('Unable to update the liquidation.'));
             }
         }
+    }
+
+    public function delete($id = null)
+    {
+        if (!$id || !is_numeric($id)) 
+        {
+            $this->Session->setFlash('Liquidation not found.');
+            $this->redirect($this->referer());
+        }
+
+        $this->Liquidation->id = $id;
+        $liquidation = $this->Liquidation->findById($id);
+        if (!$this->Liquidation->exists()) {
+            $this->Session->setFlash('Invalid liquidation provided');
+            $this->redirect(array('action'=>'index'));
+        }
+        if ($this->Liquidation->saveField('deleted', 'true')) {
+            $this->Session->setFlash(__('Liquidation deleted'));
+            $this->redirect(array('action'=>'index'));
+        }
+        $this->Session->setFlash(__('Liquidation was not deleted'));
+        $this->redirect(array('action'=>'index'));
     }
 }

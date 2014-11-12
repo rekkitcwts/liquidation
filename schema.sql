@@ -23,6 +23,7 @@ CREATE TABLE organisations (
 CREATE TABLE items (
     id serial NOT NULL,
     item_name varchar(255) NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -38,7 +39,7 @@ CREATE TABLE liquidations (
     org_id bigint NOT NULL,
     created timestamp without time zone NOT NULL,
     modified timestamp without time zone NOT NULL,
-    deleted boolean DEFAULT false,
+    deleted boolean DEFAULT false NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (buficom) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (org_id) REFERENCES organisations(id) ON UPDATE CASCADE ON DELETE RESTRICT

@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td><strong>Amount Received</strong></td>
-			<td><?php echo $liquidation['Liquidation']['amount_received']; ?></td>
+			<td><?php echo number_format($liquidation['Liquidation']['amount_received'], 2); ?></td>
 		</tr>
 	</tbody>
 </table>
@@ -64,7 +64,7 @@
 				echo $disbursement['Item']['item_name'];
 				echo '</td>';
 				echo '<td>';
-				echo $disbursement['Disbursement']['amount'];
+				echo number_format($disbursement['Disbursement']['amount'], 2);
 				echo '</td>';
 				echo '</tr>';
 				$amount_disbursed += $disbursement['Disbursement']['amount'];
@@ -72,12 +72,12 @@
 		?>
 	</tbody>
 </table>
-<p><strong>Amount Disbursed: </strong><?php echo $amount_disbursed; ?></p>
+<p><strong>Amount Disbursed: </strong><?php echo number_format($amount_disbursed, 2); ?></p>
 <?php
 	$amount_returned = $liquidation['Liquidation']['amount_received'] - $amount_disbursed;
 	if ($amount_returned > 0) 
 	{
-		echo '<p><strong>Amount to be returned: </strong>'.$amount_returned.'</p>';
+		echo '<p><strong>Amount to be returned: </strong>'.number_format($amount_returned, 2).'</p>';
 	}
 ?>
 <?php
