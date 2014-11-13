@@ -43,10 +43,10 @@ class UsersController extends AppController
         // if we get the post information, try to authenticate
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->Session->setFlash(__('Welcome, '. $this->Auth->user('username')));
+                $this->Session->setFlash(__('Welcome, '. $this->Auth->user('fname') . ' ' . $this->Auth->user('lname') . ' (Role: '. $this->Auth->user('role') .')'), 'success_notification');
                $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(__('Invalid username or password'));
+                $this->Session->setFlash(__('Invalid username or password'), 'error_notification');
             }
         }
     }
