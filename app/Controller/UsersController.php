@@ -20,13 +20,13 @@ class UsersController extends AppController
 
     public $paginate = array(
         'limit' => 25,
-        'conditions' => array('status' => '1'),
+        'conditions' => array('deleted' => 'false'),
         'order' => array('User.username' => 'asc' )
     );
      
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login','add');
+        $this->Auth->allow('login','logout');
     }
      
  
@@ -44,10 +44,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->Session->setFlash(__('Welcome, '. $this->Auth->user('username')));
-                if ($this->Auth->user('role')=='admin') {
-                    $this->redirect($this->Auth->redirectUrl());
-                }
-               // $this->redirect($this->Auth->redirectUrl());
+               $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password'));
             }

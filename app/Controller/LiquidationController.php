@@ -4,8 +4,20 @@ class LiquidationController extends AppController
 {
 	public function index()
 	{
+        if ($this->Session->check('Auth.User') && $this->Auth->user('role')=='admin') 
+        {
+            $conditions = array('Liquidation.deleted' => 'false');
+        }
+        else
+        {
+            $conditions = array(
+                'Liquidation.deleted' => 'false',
+                'Liquidation.buficom' => $this->Auth->user('id')
+            );
+        }
+
 		$this->paginate = array(
-            'conditions' => array('Liquidation.deleted' => 'false'),
+            'conditions' => $conditions,
             'limit' => 6,
             'order' => array('Liquidation.created' => 'desc' )
         );

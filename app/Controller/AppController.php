@@ -36,7 +36,7 @@ class AppController extends Controller
     'DebugKit.Toolbar',
     'Session',
     'Auth' => array(
-        'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+        'loginRedirect' => array('controller' => 'liquidation', 'action' => 'index'),
         'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
         'authenticate' => array(
             'Form' => array(
@@ -61,7 +61,10 @@ class AppController extends Controller
     	{
         	return true;
     	}
-
+        if (isset($user['role']) && $user['role'] === 'buficom') 
+        {
+            return true;
+        }
     	// Default deny
     	return false;
 	}

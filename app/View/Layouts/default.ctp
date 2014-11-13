@@ -56,9 +56,9 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation | version 0.1 Albury |
 				<?php if (AuthComponent::user('role') == 'admin'): ?>
 				<li><?php echo $this->Html->link('Users', array('controller'=>'users', 'action'=>'index')); ?></li>
 				<li><?php echo $this->Html->link('Organisations', array('controller'=>'organisation', 'action'=>'index')); ?></li>
+			<?php endif; ?>
 				<li><?php echo $this->Html->link('Items', array('controller'=>'items', 'action'=>'index')); ?></li>
 				<li><?php echo $this->Html->link('Liquidations', array('controller'=>'liquidation', 'action'=>'index')); ?></li>
-			<?php endif; ?>
 			<?php if ($this->Session->check('Auth.User')): ?>
 			<li><?php echo $this->Html->link('Logout ' . AuthComponent::user('fname') . ' ' . AuthComponent::user('lname'), array('controller'=>'users', 'action'=>'logout')); ?></li>
 			<li><a href="#">Help</a></li>

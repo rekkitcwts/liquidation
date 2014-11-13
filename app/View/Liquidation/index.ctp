@@ -17,7 +17,11 @@
         <!--    <td><?php echo $this->Form->checkbox('Liquidation.id.'.$liquidation['Liquidation']['id']); ?></td>-->
             <td><?php echo $this->Html->link( $liquidation['Liquidation']['activity']  ,   array('action'=>'view', $liquidation['Liquidation']['id']),array('escape' => false) );?></td>
             <td><?php echo $liquidation['Liquidation']['created'];?></td>
+            <?php if (AuthComponent::user('id') == $liquidation['Liquidation']['buficom']): ?>
+            <td>Me</td>
+            <?php else: ?>
             <td><?php echo $liquidation['Buficom']['fname'] . ' ' . $liquidation['Buficom']['lname'] ?></td>
+            <?php endif; ?>
             <td>
             <?php echo $this->Html->link("<span class=\"glyphicon glyphicon-pencil\"></span> Edit",array('action'=>'edit', $liquidation['Liquidation']['id']), array('escape' => false, 'class' => 'btn btn-success')); ?>
             <?php
