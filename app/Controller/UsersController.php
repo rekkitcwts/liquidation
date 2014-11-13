@@ -79,10 +79,10 @@ class UsersController extends AppController
                  
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been created'));
+                $this->Session->setFlash(__('The user has been created'), 'success_notification');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be created. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be created. Please fix the errors below.'), 'error_notification');
             }
         }
     }
@@ -106,7 +106,7 @@ class UsersController extends AppController
                 $this->User->id = $id;
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('The user has been updated'));
-                    $this->redirect(array('action' => 'edit', $id));
+                    $this->redirect(array('action' => 'index'));
                 }else{
                     $this->Session->setFlash(__('Unable to update your user.'));
                 }
@@ -122,20 +122,20 @@ class UsersController extends AppController
     	$this->adminChecker();
          
         if (!$id) {
-            $this->Session->setFlash('Please provide a user id');
+            $this->Session->setFlash('Please provide a user id', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
          
         $this->User->id = $id;
         if (!$this->User->exists()) {
-            $this->Session->setFlash('Invalid user id provided');
+            $this->Session->setFlash('Invalid user id provided', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
         if ($this->User->saveField('deleted', 'true')) {
-            $this->Session->setFlash(__('User deleted'));
+            $this->Session->setFlash(__('User deleted'), 'success_notification');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('User was not deleted'));
+        $this->Session->setFlash(__('User was not deleted', 'error_notification'));
         $this->redirect(array('action' => 'index'));
     }
      
@@ -144,20 +144,20 @@ class UsersController extends AppController
     	$this->adminChecker();
          
         if (!$id) {
-            $this->Session->setFlash('Please provide a user id');
+            $this->Session->setFlash('Please provide a user id', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
          
         $this->User->id = $id;
         if (!$this->User->exists()) {
-            $this->Session->setFlash('Invalid user id provided');
+            $this->Session->setFlash('Invalid user id provided', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
         if ($this->User->saveField('deleted', 'false')) {
-            $this->Session->setFlash(__('User re-activated'));
+            $this->Session->setFlash(__('User re-activated'), 'success_notification');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('User was not re-activated'));
+        $this->Session->setFlash(__('User was not re-activated', 'error_notification'));
         $this->redirect(array('action' => 'index'));
     }
 
