@@ -124,4 +124,33 @@ class LiquidationController extends AppController
         $this->Session->setFlash(__('Liquidation was not deleted'));
         $this->redirect(array('action'=>'index'));
     }
+
+    public function generatePDF($id = null)
+    {
+        if (!$id)
+        {
+            $this->Session->setFlash('Sorry, there was no property ID submitted.');
+            $this->redirect(array('action'=>'index'), null, true);
+        }
+        Configure::write('debug',0); // Otherwise we cannot use this method while developing
+
+        $id = intval($id);
+
+        $liquidation = $this->Liquidation->findById($id);
+        if (!$liquidation) 
+        {
+            $this->Session->setFlash('The liquidation report you specified was not found.', 'error_notification');
+            $this->redirect(array('action'=>'index'));
+        }
+        else
+        {
+            $this->loadModel('Disbursement');
+            $disbursements = $this->Disbursement->find('all', array('conditions' => array('Disbursement.liquidation_id' => $id, 'Disbursement.deleted' => 'false')));
+            $this->set('liquidation', $liquidation);
+            $this->set('disbursements', $disbursements);
+        }
+        
+        $this->layout = 'pdf'; //this will use the pdf.ctp layout
+        $this->render(); 
+    }
 }
