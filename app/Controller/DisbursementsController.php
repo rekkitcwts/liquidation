@@ -7,14 +7,14 @@ class DisbursementsController extends AppController
     {
         if (!$id || !is_numeric($id)) 
         {
-            $this->Session->setFlash('No valid data to display.');
+            $this->Session->setFlash('No valid data to display.', 'error_notification');
             $this->redirect($this->referer());
         }
 
         $disbursement = $this->Disbursement->findById($id);
         if (!$disbursement) 
         {
-            $this->Session->setFlash('Disbursement not found.');
+            $this->Session->setFlash('Disbursement not found.', 'error_notification');
             $this->redirect(array('controller' => 'liquidation','action'=>'index'));
         } 
         else 
@@ -30,12 +30,12 @@ class DisbursementsController extends AppController
             $this->Disbursement->id = $id;
             if ($this->Disbursement->save($this->request->data)) 
             {
-                $this->Session->setFlash(__('Disbursement has been updated'));
+                $this->Session->setFlash(__('Disbursement has been updated'), 'success_notification');
                 $this->redirect(array('action' => 'view', $disbursement['Liquidation']['id']));
             }
             else
             {
-                $this->Session->setFlash(__('Unable to update the disbursement.'));
+                $this->Session->setFlash(__('Unable to update the disbursement.'), 'error_notification');
             }
         }
     }
@@ -45,21 +45,21 @@ class DisbursementsController extends AppController
     {
         if (!$id || !is_numeric($id)) 
         {
-            $this->Session->setFlash('Data not found');
+            $this->Session->setFlash('Data not found', 'error_notification');
             $this->redirect($this->referer());
         }
 
         $this->Disbursement->id = $id;
         $disbursement = $this->Disbursement->findById($id);
         if (!$this->Disbursement->exists()) {
-            $this->Session->setFlash('Invalid disbursement provided');
+            $this->Session->setFlash('Invalid disbursement provided', 'error_notification');
             $this->redirect(array('controller' => 'liquidation','action'=>'view',$disbursement['Liquidation']['id']));
         }
         if ($this->Disbursement->saveField('deleted', 'true')) {
-            $this->Session->setFlash(__('Disbursement deleted'));
+            $this->Session->setFlash(__('Disbursement deleted'), 'success_notification');
             $this->redirect(array('controller' => 'liquidation','action'=>'view',$disbursement['Liquidation']['id']));
         }
-        $this->Session->setFlash(__('Disbursement was not deleted'));
+        $this->Session->setFlash(__('Disbursement was not deleted'), 'error_notification');
         $this->redirect(array('controller' => 'liquidation','action'=>'view',$disbursement['Liquidation']['id']));
     }
 
@@ -70,14 +70,14 @@ class DisbursementsController extends AppController
 
         if (!$id || !is_numeric($id)) 
         {
-            $this->Session->setFlash('No valid data to display.');
+            $this->Session->setFlash('No valid data to display.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
 
         $liquidation = $this->Liquidation->findById($id);
         if (!$liquidation) 
         {
-            $this->Session->setFlash('The liquidation report you specified was not found.');
+            $this->Session->setFlash('The liquidation report you specified was not found.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
         else
@@ -98,12 +98,12 @@ class DisbursementsController extends AppController
             $this->Disbursement->create();
             if ($this->Disbursement->save($this->request->data)) 
             {
-                $this->Session->setFlash(__('Disbursement added.'));
+                $this->Session->setFlash(__('Disbursement added.'), 'success_notification');
                 $this->redirect(array('action'=>'view', $liquidation['Liquidation']['id']));
             } 
             else 
             {
-                $this->Session->setFlash(__('Unable to add disbursement.'));
+                $this->Session->setFlash(__('Unable to add disbursement.'), 'error_notification');
             }  
         }
 	}

@@ -35,10 +35,10 @@ class LiquidationController extends AppController
         {
             $this->Liquidation->create();
             if ($this->Liquidation->save($this->request->data)) {
-                $this->Session->setFlash(__('Liquidation report filed. Please select it to add items for reimbursement.'));
+                $this->Session->setFlash(__('Liquidation report filed. Please select it to add items for reimbursement.'), 'success_notification');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Unable to file a liquidation report, please try again later.'));
+                $this->Session->setFlash(__('Unable to file a liquidation report, please try again later.'), 'error_notification');
             }  
         }
 	}
@@ -47,14 +47,14 @@ class LiquidationController extends AppController
 	{
 		if (!$id || !is_numeric($id)) 
 		{
-            $this->Session->setFlash('No valid data to display.');
+            $this->Session->setFlash('No valid data to display.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
 
         $liquidation = $this->Liquidation->findById($id);
         if (!$liquidation) 
         {
-        	$this->Session->setFlash('The liquidation report you specified was not found.');
+        	$this->Session->setFlash('The liquidation report you specified was not found.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
         else
@@ -70,14 +70,14 @@ class LiquidationController extends AppController
     {
         if (!$id || !is_numeric($id)) 
         {
-            $this->Session->setFlash('No valid data to display.');
+            $this->Session->setFlash('No valid data to display.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
 
         $liquidation = $this->Liquidation->findById($id);
         if (!$liquidation) 
         {
-            $this->Session->setFlash('The liquidation report you specified was not found.');
+            $this->Session->setFlash('The liquidation report you specified was not found.', 'error_notification');
             $this->redirect(array('action'=>'index'));
         }
         else
@@ -93,12 +93,12 @@ class LiquidationController extends AppController
             $this->Liquidation->id = $id;
             if ($this->Liquidation->save($this->request->data)) 
             {
-                $this->Session->setFlash(__('Liquidation has been updated'));
+                $this->Session->setFlash(__('Liquidation has been updated'), 'success_notification');
                 $this->redirect(array('action' => 'index'));
             }
             else
             {
-                $this->Session->setFlash(__('Unable to update the liquidation.'));
+                $this->Session->setFlash(__('Unable to update the liquidation.'), 'error_notification');
             }
         }
     }
