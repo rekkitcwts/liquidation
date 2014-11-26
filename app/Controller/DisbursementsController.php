@@ -2,6 +2,23 @@
 
 class DisbursementsController extends AppController 
 {
+    public function isAuthorized($user)
+    {
+        return parent::isAuthorized($user);
+    }
+
+    public function index()
+    {
+        if ($this->Session->check('Auth.User') === false) 
+        {
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
+        }
+        else
+        {
+            $this->redirect(array('controller' => 'liquidation','action'=>'index'));
+        }
+    }
+
     // $id = Disbursement ID
     public function edit($id = null)
     {
