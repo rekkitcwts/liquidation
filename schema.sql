@@ -17,7 +17,9 @@ CREATE TABLE users (
 CREATE TABLE organisations (
     id serial NOT NULL,
     name varchar(255) NOT NULL,
-    PRIMARY KEY (id)
+    adviser bigint NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (adviser) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE items (

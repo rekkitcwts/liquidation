@@ -19,7 +19,7 @@
 $cakeDescription = __d('cake_dev', 'Automated Liquidation | version 0.1 Albury | ');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en-au">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -37,7 +37,13 @@ $cakeDescription = __d('cake_dev', 'Automated Liquidation | version 0.1 Albury |
 	echo $this->fetch('script');
 	?>
 	<style type="text/css">
-	body { margin-top: 70px; }
+	body {
+		margin-top: 70px; 
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
 	</style>
 </head>
 <body>

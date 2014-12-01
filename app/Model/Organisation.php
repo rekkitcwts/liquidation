@@ -2,6 +2,18 @@
 
 class Organisation extends AppModel 
 {
+	public $belongsTo = array(
+		'Adviser' => array(
+			'className' => 'User',
+			'foreignKey' => 'adviser',
+			'conditions' => array(
+				'Adviser.role' => 'adviser'
+			),
+			'type' => 'inner',
+			'dependent' => true
+		)
+	);
+
 	public $validate = array(
 		'name' => array(
 			'nonEmpty' => array(

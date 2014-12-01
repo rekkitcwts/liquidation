@@ -25,18 +25,22 @@ class OrganisationController extends AppController
     {
     	$this->adminChecker();
 
+        $this->loadModel('User');
+        $adviser = $this->User->find('all', array('order' => 'User.lname ASC', 'conditions' => array('User.role' => 'adviser')));
+        $this->set('adviser', $adviser);
+
         if ($this->request->is('post')) 
         {
                  
             $this->Organisation->create();
             if ($this->Organisation->save($this->request->data)) 
             {
-                $this->Session->setFlash(__('The organisation has been created'));
+                $this->Session->setFlash(__('The organisation has been created'), 'success_notification');
                 $this->redirect(array('action' => 'index'));
             } 
             else 
             {
-                $this->Session->setFlash(__('Sorry, something bad happened when trying to add a new organisation.'));
+                $this->Session->setFlash(__('Sorry, something bad happened when trying to add a new organisation.'), 'error_notification');
             }  
         }
     }

@@ -10,7 +10,7 @@
         echo $this->Form->input('lname',array('label' => 'Last Name', 'class' => 'form-control'));
         echo $this->Form->input('role', array(
             'class' => 'form-control',
-            'options' => array('buficom' => 'BUFICOM', 'admin' => 'Administrator')
+            'options' => array('buficom' => 'BUFICOM', 'admin' => 'Administrator', 'adviser' => 'Adviser')
         ));
         echo '<br />';
         echo $this->Form->submit('Add User', array('class' => 'btn btn-primary',  'title' => 'Click here to add the user') );

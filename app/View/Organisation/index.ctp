@@ -2,7 +2,6 @@
 	<table class="table table-hover table-bordered">
     <thead>
         <tr>
-            <th><?php echo $this->Form->checkbox('all', array('name' => 'CheckAll',  'id' => 'CheckAll')); ?></th>
             <th><?php echo $this->Paginator->sort('name', 'Name');?>  </th>
             <th>Actions</th>
         </tr>
@@ -13,10 +12,9 @@
         <?php $count ++;?>
         <?php if($count % 2): echo '<tr>'; else: echo '<tr class="zebra">' ?>
         <?php endif; ?>
-            <td><?php echo $this->Form->checkbox('Organisation.id.'.$organisation['Organisation']['id']); ?></td>
             <td><?php echo $this->Html->link( $organisation['Organisation']['name']  ,   array('action'=>'edit', $organisation['Organisation']['id']),array('escape' => false) );?></td>
             <td >
-            <?php echo $this->Html->link(    "Edit",   array('action'=>'edit', $organisation['Organisation']['id']) ); ?>
+            <?php echo $this->Html->link("Edit", array('action'=>'edit', $organisation['Organisation']['id']) ); ?>
             <?php
 /*                if( $user['User']['deleted'] !== 'f'){
                     echo $this->Html->link(    "Delete", array('action'=>'delete', $user['User']['id']));}else{
@@ -51,10 +49,7 @@
 
 <?php 
     $this->start('sidebar');
-    echo $this->Html->link( "Add A New Organisation",   array('action'=>'add'),array('escape' => false) ); 
-?>
-<br/>
-<?php
-echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout'));
+//    echo $this->Html->link("Add A New Organisation", array('action'=>'add'),array('escape' => false) );
+    echo $this->Html->link("<span class=\"glyphicon glyphicon-plus\"></span> Add A New Organisation", array('action'=>'add'),array('escape' => false, 'class' => 'btn btn-primary') );
     $this->end();
 ?>
